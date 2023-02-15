@@ -21,10 +21,7 @@ function findKthMaxMin(array, kth) {
       if (array[j] < array[smallestPosition]) smallestPosition = j;
     swap(smallestPosition, i);
   }
-  return {
-    min: array[kth - 1],
-    max: array[array.length - kth],
-  };
+  return array[kth - 1];
 }
 
 console.log(findKthMaxMin([7, 10, 4, 20, 15], 4));
