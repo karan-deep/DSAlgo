@@ -72,3 +72,5 @@ console.log(singlyLinkedList);
 singlyLinkedList.unshift("Last At first");
 console.log(singlyLinkedList);
 singlyLinkedList.shift();
+
+module.exports = { SinglyLinkedList };
