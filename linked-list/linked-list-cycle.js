@@ -25,11 +25,12 @@ const { SinglyLinkedList } = require("./singly-linked-list");
 const hasCycle = function (head) {
   if (!head || !head.next) return false;
 
-  let secondHead = head;
-  while (head && head.next) {
-    head = head.next;
+  let firsHead = head,
+    secondHead = head;
+  while (secondHead && secondHead.next) {
+    firsHead = firsHead.next;
     secondHead = secondHead.next.next;
-    if (head === secondHead) return true;
+    if (firsHead === secondHead) return true;
   }
   return false;
 };
