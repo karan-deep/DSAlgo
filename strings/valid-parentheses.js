@@ -15,7 +15,7 @@
 // Input: s = "(]"
 // Output: false
 
-// Explanation - Use stack : last opening bracket must be closed subsequently else not valid
+// Logic Explanation - Use stack : last opening bracket must be closed subsequently else not valid
 
 /**
  * @param {string} s
