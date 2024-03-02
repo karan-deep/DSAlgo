@@ -9,6 +9,7 @@ class Node {
 class BinaryTree {
   constructor() {
     this.root = null;
+    this.nullSet = new Set();
   }
 
   insert(val) {
@@ -17,6 +18,9 @@ class BinaryTree {
     let queue = [this.root];
     while (queue.length) {
       let current = queue.shift();
+      if (current.left && current.left.val === null) this.nullSet.add(current);
+      if (current.right && current.right.val === null)
+        this.nullSet.add(current);
       if (current.val) {
         if (!current.left) return (current.left = newNode);
         else queue.push(current.left);
@@ -24,6 +28,27 @@ class BinaryTree {
         else queue.push(current.right);
       }
     }
+  }
+
+  removeNullNode() {
+    this.nullSet.forEach((node) => {
+      if (node.left.val === null) node.left = null;
+      if (node.right.val === null) node.right = null;
+    });
+  }
+
+  bfs() {
+    let current = this.root,
+      data = [],
+      queue = [];
+    queue.push(current);
+    while (queue.length) {
+      current = queue.shift();
+      data.push(current.val);
+      if (current.left) queue.push(current.left);
+      if (current.right) queue.push(current.right);
+    }
+    return data;
   }
 }
 
