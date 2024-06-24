@@ -14,8 +14,7 @@ const { BinaryTree } = require("./binary-tree");
 const isSubtree = function (root, subRoot) {
   function isEqual(root, subRoot) {
     if (!root && !subRoot) return true;
-    if ((!root && subRoot) || (root && !subRoot)) return false;
-    if (root.val !== subRoot.val) return false;
+    if (!root || !subRoot || root.val !== subRoot.val) return false;
     return (
       isEqual(root.left, subRoot.left) && isEqual(root.right, subRoot.right)
     );
