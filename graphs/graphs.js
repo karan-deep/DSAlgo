@@ -68,6 +68,26 @@ class Graph {
     return result;
   }
 
+  breadthFirstTransversal(start) {
+    const result = [];
+    const queue = [start];
+    const verticesVisited = {};
+    verticesVisited[start] = true;
+
+    while (queue.length) {
+      const vertex = queue.shift();
+      result.push(vertex);
+      verticesVisited[vertex] = true;
+      this.adjacencyList[vertex].forEach((element) => {
+        if (!verticesVisited[element]) {
+          verticesVisited[element] = true;
+          queue.push(element);
+        }
+      });
+    }
+
+    return result;
+  }
 }
 
 let graph = new Graph();
@@ -89,3 +109,4 @@ console.log(graph.adjacencyList);
 
 console.log(graph.depthFirstTransversalRecursive("Tortillas"));
 console.log(graph.depthFirstTransversalIterative("Tortillas"));
+console.log(graph.breadthFirstTransversal("Tortillas"));
