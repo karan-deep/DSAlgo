@@ -4,13 +4,16 @@ class Graph {
   constructor() {
     this.adjacencyList = {};
   }
+
   addVertex(vertex) {
     if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
   }
+
   addEdge(v1, v2) {
     this.adjacencyList[v1].push(v2);
     this.adjacencyList[v2].push(v1);
   }
+
   removeEdge(vertex1, vertex2) {
     this.adjacencyList[vertex1] = this.adjacencyList[vertex1].filter(
       (vertex) => vertex !== vertex2
@@ -19,6 +22,7 @@ class Graph {
       (vertex) => vertex !== vertex1
     );
   }
+
   removeVertex(vertex) {
     while (this.adjacencyList[vertex].length) {
       const adjacentVertex = this.adjacencyList[vertex].pop();
@@ -26,9 +30,28 @@ class Graph {
     }
     delete this.adjacencyList[vertex];
   }
+
+  depthFirstTransversalRecursive(start) {
+    const result = [];
+    const verticesVisited = {};
+    const adjacencyList = this.adjacencyList;
+
+    (function dfsHelper(vertex) {
+      if (!vertex) return null;
+      verticesVisited[vertex] = true;
+      result.push(vertex);
+      adjacencyList[vertex].forEach((element) => {
+        if (!verticesVisited[element]) return dfsHelper(element);
+      });
+    })(start);
+
+    return result;
+  }
+
 }
 
 let graph = new Graph();
+
 graph.addVertex("Donut");
 graph.addVertex("Tortillas");
 graph.addVertex("Apple");
@@ -43,3 +66,5 @@ graph.addEdge("Lemon", "Apple");
 graph.removeVertex("Donut");
 
 console.log(graph.adjacencyList);
+
+console.log(graph.depthFirstTransversalRecursive("Tortillas"));
