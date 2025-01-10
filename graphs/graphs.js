@@ -48,6 +48,26 @@ class Graph {
     return result;
   }
 
+  depthFirstTransversalIterative(start) {
+    const result = [];
+    const stack = [start];
+    const verticesVisited = {};
+    verticesVisited[start] = true;
+
+    while (stack.length) {
+      const vertex = stack.pop();
+      result.push(vertex);
+      this.adjacencyList[vertex].forEach((element) => {
+        if (!verticesVisited[element]) {
+          verticesVisited[element] = true;
+          stack.push(element);
+        }
+      });
+    }
+
+    return result;
+  }
+
 }
 
 let graph = new Graph();
@@ -68,3 +88,4 @@ graph.removeVertex("Donut");
 console.log(graph.adjacencyList);
 
 console.log(graph.depthFirstTransversalRecursive("Tortillas"));
+console.log(graph.depthFirstTransversalIterative("Tortillas"));
